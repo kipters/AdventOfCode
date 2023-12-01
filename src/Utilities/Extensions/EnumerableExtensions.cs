@@ -56,4 +56,30 @@ public static class EnumerableExtensions
             yield return buffer.ToArray();
         }
     }
+
+    public static IEnumerable<T[]> ChunkBy<T>(this IEnumerable<T> sequence, T separator) where T : notnull
+    {
+        var buffer = new List<T>();
+
+        foreach (var item in sequence)
+        {
+            if (item.Equals(separator))
+            {
+                if (buffer.Count != 0)
+                {
+                    yield return buffer.ToArray();
+                    buffer.Clear();
+                }
+            }
+            else
+            {
+                buffer.Add(item);
+            }
+        }
+
+        if (buffer.Count != 0)
+        {
+            yield return buffer.ToArray();
+        }
+    }
 }
