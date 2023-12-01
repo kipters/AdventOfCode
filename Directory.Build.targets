@@ -1,0 +1,5 @@
+<Project>
+  <ItemGroup Condition=" '$(IsTestProject)' == 'true' ">
+    <ProjectReference Include="..\Utilities/Utilities.csproj" />
+  </ItemGroup>
+</Project>

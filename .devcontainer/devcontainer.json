@@ -1,0 +1,19 @@
+{
+  "name": "AdventOfCode",
+  "context": "..",
+  "dockerFile": "Dockerfile",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "editorconfig.editorconfig",
+        "ms-dotnettools.csharp",
+        "seatonjiang.gitmoji-vscode",
+        "ms-dotnettools.csdevkit",
+        "ms-vscode.powershell",
+        "formulahendry.dotnet-test-explorer",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}
