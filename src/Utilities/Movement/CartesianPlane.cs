@@ -16,6 +16,22 @@ public class CartesianPlane
     public Vector2 Position { get; private set; }
     public Direction Direction { get; private set; } = Direction.North;
 
+    public void Move(Direction direction, int steps)
+    {
+        Vector2 vector = direction switch
+        {
+            Direction.North => new(0, -1),
+            Direction.East => new(1, 0),
+            Direction.South => new(0, 1),
+            Direction.West => new(-1, 0),
+            _ => throw new ArgumentOutOfRangeException(nameof(direction))
+        };
+
+        vector *= steps;
+
+        Position += vector;
+    }
+
     public void Walk(int steps)
     {
         var vector = DirectionVectors.Map[Direction];

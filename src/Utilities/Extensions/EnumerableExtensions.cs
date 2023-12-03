@@ -2,6 +2,18 @@ namespace Utilities.Extensions;
 
 public static class EnumerableExtensions
 {
+    public static IEnumerable<TResult> Mutate<TMutant, TInput, TResult>(this IEnumerable<TInput> sequence
+        , TMutant mutant
+        , Action<TMutant, TInput> function
+        , Func<TMutant, TResult> predicate)
+    {
+        foreach (var item in sequence)
+        {
+            function(mutant, item);
+            yield return predicate(mutant);
+        }
+    }
+
     public static IEnumerable<T> Loop<T>(this IEnumerable<T> sequence)
     {
         while (true)
