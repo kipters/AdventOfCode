@@ -2,6 +2,18 @@ namespace Utilities.Extensions;
 
 public static class EnumerableExtensions
 {
+    public static string Stringify<T>(this IEnumerable<T> sequence) => string.Join(' ', sequence);
+
+    public static IEnumerable<T> Inspect<T>(this IEnumerable<T> sequence, Action<T> predicate)
+    {
+        using var enumerator = sequence.GetEnumerator();
+        while (enumerator.MoveNext())
+        {
+            predicate(enumerator.Current);
+            yield return enumerator.Current;
+        }
+    }
+
     public static IEnumerable<TResult> Mutate<TMutant, TInput, TResult>(this IEnumerable<TInput> sequence
         , TMutant mutant
         , Action<TMutant, TInput> function
