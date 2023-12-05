@@ -2,6 +2,28 @@ namespace Utilities.Extensions;
 
 public static class EnumerableExtensions
 {
+    public static IEnumerable<T> SkipBy<T>(this IEnumerable<T> sequence, Func<T, T, bool> predicate)
+    {
+        using var enumerator = sequence.GetEnumerator();
+        if (!enumerator.MoveNext())
+        {
+            yield break;
+        }
+
+        var previous = enumerator.Current;
+        yield return previous;
+
+        while (enumerator.MoveNext())
+        {
+            var shouldSkip = predicate(previous, enumerator.Current);
+            previous = enumerator.Current;
+            if (!shouldSkip)
+            {
+                yield return enumerator.Current;
+            }
+        }
+    }
+
     public static string Stringify<T>(this IEnumerable<T> sequence) => string.Join(' ', sequence);
 
     public static IEnumerable<T> Inspect<T>(this IEnumerable<T> sequence, Action<T> predicate)
