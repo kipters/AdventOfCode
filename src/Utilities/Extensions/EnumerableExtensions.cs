@@ -1,7 +1,20 @@
+using System.Numerics;
+
 namespace Utilities.Extensions;
 
 public static class EnumerableExtensions
 {
+    public static IEnumerable<T> Range<T>(T start, long count)
+        where T : IIncrementOperators<T>
+    {
+        var initial = start;
+        for (var i = 0; i < count; i++)
+        {
+            yield return initial;
+            initial++;
+        }
+    }
+
     public static IEnumerable<T> SkipBy<T>(this IEnumerable<T> sequence, Func<T, T, bool> predicate)
     {
         using var enumerator = sequence.GetEnumerator();
