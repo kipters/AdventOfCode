@@ -19,9 +19,9 @@ public class Day5
         Assert.Equal(result, min);
     }
 
-    [Theory(Skip = "Slow")]
+    [Theory]
     [FileLines("data_sample.txt", 46)]
-    [FileLines("data.txt", 125742456)]
+    [FileLines("data.txt", 125742456, Skip = "Slow")]
     public void Part2(IEnumerable<string> data, int result)
     {
         var seedsRanges = data
@@ -41,9 +41,9 @@ public class Day5
         Assert.Equal(result, min);
     }
 
-    [Theory(Skip = "Slow")]
+    [Theory]
     [FileLines("data_sample.txt", 46)]
-    [FileLines("data.txt", 125742456)]
+    [FileLines("data.txt", 125742456, Skip = "Slow")]
     public void Part2_BottomUp(IEnumerable<string> data, int result)
     {
         var seeds = data
