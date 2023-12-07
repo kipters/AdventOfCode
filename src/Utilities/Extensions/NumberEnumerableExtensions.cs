@@ -15,4 +15,18 @@ public static class NumberEnumerableExtensions
             yield return accumulator;
         }
     }
+
+    public static T Product<T>(this IEnumerable<T> sequence)
+        where T : IMultiplyOperators<T, T, T>, IMultiplicativeIdentity<T, T>
+    {
+        var a = T.MultiplicativeIdentity;
+        using var enumerator = sequence.GetEnumerator();
+
+        while (enumerator.MoveNext())
+        {
+            a *= enumerator.Current;
+        }
+
+        return a;
+    }
 }
