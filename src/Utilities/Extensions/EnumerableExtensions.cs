@@ -49,15 +49,29 @@ public static class EnumerableExtensions
         }
     }
 
-    public static IEnumerable<TResult> Mutate<TMutant, TInput, TResult>(this IEnumerable<TInput> sequence
-        , TMutant mutant
-        , Action<TMutant, TInput> function
-        , Func<TMutant, TResult> predicate)
+    public static IEnumerable<TResult> Mutate<TMutable, TInput, TResult>(this IEnumerable<TInput> sequence
+        , TMutable mutable
+        , Action<TMutable, TInput> function
+        , Func<TMutable, TResult> predicate)
     {
         foreach (var item in sequence)
         {
-            function(mutant, item);
-            yield return predicate(mutant);
+            function(mutable, item);
+            yield return predicate(mutable);
+        }
+    }
+
+    public static IEnumerable<TState> StatefulSelect<TInput, TState>(this IEnumerable<TInput> sequence
+        , TState initialState
+        , Func<TInput, TState, TState> mutator)
+    {
+        using var enumerator = sequence.GetEnumerator();
+        var state = initialState;
+
+        while (enumerator.MoveNext())
+        {
+            state = mutator(enumerator.Current, state);
+            yield return state;
         }
     }
 
