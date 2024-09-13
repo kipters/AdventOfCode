@@ -6,6 +6,17 @@ namespace Xunit;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 public class FileLinesAttribute(string filename, params object[] passthrough) : DataAttribute
 {
+    private bool _isSlow;
+    public bool IsSlow
+    {
+        get => _isSlow;
+        init
+        {
+            _isSlow = value;
+            Skip = value && Environment.GetEnvironmentVariable("RUN_SLOW_TESTS") is null ? "Slow test" : Skip;
+        }
+    }
+
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
         var typeName = testMethod.DeclaringType!.Name;
