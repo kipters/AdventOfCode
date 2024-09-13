@@ -4,7 +4,7 @@ using Xunit.Sdk;
 namespace Xunit;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class FileLinesAttribute(string filename, params object[] passthrough) : DataAttribute
+public sealed class FileLinesAttribute(string filename, params object[] passthrough) : DataAttribute
 {
     private bool _isSlow;
     public bool IsSlow
@@ -19,6 +19,7 @@ public class FileLinesAttribute(string filename, params object[] passthrough) : 
 
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
+        ArgumentNullException.ThrowIfNull(testMethod);
         var typeName = testMethod.DeclaringType!.Name;
         var path = Path.Combine(typeName, filename);
 
@@ -44,4 +45,7 @@ public class FileLinesAttribute(string filename, params object[] passthrough) : 
             }
         }
     }
+
+    public string Filename => filename;
+    public object[] Passthrough => passthrough;
 }

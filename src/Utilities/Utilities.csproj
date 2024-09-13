@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <IsTestProject>false</IsTestProject>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <NoWarn>$(NoWarn);CA1515;IDE0130</NoWarn>
   </PropertyGroup>
 
 </Project>

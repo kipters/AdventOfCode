@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <NoWarn>$(NoWarn);xUnit1026</NoWarn>
+    <NoWarn>$(NoWarn);xUnit1026;IDE0130</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

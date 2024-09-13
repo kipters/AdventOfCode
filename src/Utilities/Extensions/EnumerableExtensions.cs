@@ -17,6 +17,8 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T> SkipBy<T>(this IEnumerable<T> sequence, Func<T, T, bool> predicate)
     {
+        ArgumentNullException.ThrowIfNull(sequence);
+        ArgumentNullException.ThrowIfNull(predicate);
         using var enumerator = sequence.GetEnumerator();
         if (!enumerator.MoveNext())
         {
@@ -41,6 +43,8 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T> Inspect<T>(this IEnumerable<T> sequence, Action<T> predicate)
     {
+        ArgumentNullException.ThrowIfNull(sequence);
+        ArgumentNullException.ThrowIfNull(predicate);
         using var enumerator = sequence.GetEnumerator();
         while (enumerator.MoveNext())
         {
@@ -54,6 +58,9 @@ public static class EnumerableExtensions
         , Action<TMutable, TInput> function
         , Func<TMutable, TResult> predicate)
     {
+        ArgumentNullException.ThrowIfNull(sequence);
+        ArgumentNullException.ThrowIfNull(predicate);
+        ArgumentNullException.ThrowIfNull(function);
         foreach (var item in sequence)
         {
             function(mutable, item);
@@ -65,6 +72,8 @@ public static class EnumerableExtensions
         , TState initialState
         , Func<TInput, TState, TState> mutator)
     {
+        ArgumentNullException.ThrowIfNull(sequence);
+        ArgumentNullException.ThrowIfNull(mutator);
         using var enumerator = sequence.GetEnumerator();
         var state = initialState;
 
@@ -77,6 +86,7 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T> Loop<T>(this IEnumerable<T> sequence)
     {
+        ArgumentNullException.ThrowIfNull(sequence);
         while (true)
         {
             using var enumerator = sequence.GetEnumerator();
@@ -89,6 +99,7 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T> Repeat<T>(this IEnumerable<T> sequence, int items)
     {
+        ArgumentNullException.ThrowIfNull(sequence);
         using var fillEnumerator = sequence.GetEnumerator();
         while (fillEnumerator.MoveNext())
         {
@@ -104,6 +115,7 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T[]> SlidingWindow<T>(this IEnumerable<T> sequence, int windowSize)
     {
+        ArgumentNullException.ThrowIfNull(sequence);
         var buffer = new List<T>(windowSize);
         using var enumerator = sequence.GetEnumerator();
 
@@ -132,6 +144,7 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T[]> ChunkBy<T>(this IEnumerable<T> sequence, T separator) where T : notnull
     {
+        ArgumentNullException.ThrowIfNull(sequence);
         var buffer = new List<T>();
 
         foreach (var item in sequence)

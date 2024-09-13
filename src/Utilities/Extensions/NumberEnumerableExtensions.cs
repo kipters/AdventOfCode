@@ -7,6 +7,7 @@ public static class NumberEnumerableExtensions
     public static IEnumerable<T> ProgressiveSum<T>(this IEnumerable<T> sequence)
         where T : IAdditionOperators<T, T, T>, IAdditiveIdentity<T, T>
     {
+        ArgumentNullException.ThrowIfNull(sequence);
         var accumulator = T.AdditiveIdentity;
 
         foreach (var number in sequence)
@@ -19,6 +20,7 @@ public static class NumberEnumerableExtensions
     public static T Product<T>(this IEnumerable<T> sequence)
         where T : IMultiplyOperators<T, T, T>, IMultiplicativeIdentity<T, T>
     {
+        ArgumentNullException.ThrowIfNull(sequence);
         var a = T.MultiplicativeIdentity;
         using var enumerator = sequence.GetEnumerator();
 
