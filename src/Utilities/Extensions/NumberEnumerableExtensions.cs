@@ -44,6 +44,30 @@ public static class NumberEnumerableExtensions
         return a;
     }
 
+    public static (T min, T max) Bounds<T>(this IEnumerable<T> sequence)
+        where T : IComparisonOperators<T, T, bool>
+    {
+        ArgumentNullException.ThrowIfNull(sequence);
+        using var enumerator = sequence.GetEnumerator();
+
+        if (!enumerator.MoveNext())
+        {
+            throw new InvalidOperationException("The collection is empty");
+        }
+
+        var min = enumerator.Current!;
+        var max = enumerator.Current!;
+
+        while (enumerator.MoveNext())
+        {
+            var val = enumerator.Current;
+            min = val < min ? val : min;
+            max = val > max ? val : max;
+        }
+
+        return (min, max);
+    }
+
     public static T LeastCommonMultiple<T>(T a, T b) where T : INumber<T>
         => a / GreatestCommonDivisor(a, b) * b;
 

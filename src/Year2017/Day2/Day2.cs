@@ -1,20 +1,43 @@
+using Utilities.Extensions;
+using Xunit.Abstractions;
+
 namespace Year2017;
 
 public class Day2
 {
-    //[Theory]
-    //[FileLines("data_sample.txt", 0)]
-    //[FileLines("data.txt", 0)]
+    [Theory]
+    [InlineData(new string[] { "5\t1\t9\t5", "7\t5\t3", "2\t4\t6\t8" }, 18)]
+    [FileLines("data.txt", 47136)]
     public void Part1(IEnumerable<string> data, int result)
     {
-        throw new NotImplementedException();
+        var checksum = data
+            .Select(l => l
+                .Split('\t', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Select(int.Parse)
+            )
+            .Select(NumberEnumerableExtensions.Bounds)
+            .Select(t => t.max - t.min)
+            .Sum();
+
+        Assert.Equal(result, checksum);
     }
 
-    //[Theory]
-    //[FileLines("data_sample.txt", 0)]
-    //[FileLines("data.txt", 0)]
+    [Theory]
+    [InlineData(new string[] { "5\t9\t2\t8", "9\t4\t7\t3", "3\t8\t6\t5" }, 9)]
+    [FileLines("data.txt", 250)]
     public void Part2(IEnumerable<string> data, int result)
     {
-        throw new NotImplementedException();
+        var checksum = data
+            .Select(l => l
+                .Split('\t', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Select(int.Parse)
+                .AsPairs()
+                .Where(t => t.a != t.b)
+                .Single(t => t.a % t.b == 0)
+            )
+            .Select(t => t.a / t.b)
+            .Sum();
+
+        Assert.Equal(result, checksum);
     }
 }

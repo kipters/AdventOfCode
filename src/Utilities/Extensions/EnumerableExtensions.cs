@@ -169,4 +169,22 @@ public static class EnumerableExtensions
             yield return buffer.ToArray();
         }
     }
+
+    public static IEnumerable<(T a, T b)> AsPairs<T>(this IEnumerable<T> sequence)
+    {
+        var data = sequence.ToArray();
+
+        if (data.Length < 2)
+        {
+            throw new ArgumentException("Sequence must contain at least two items", nameof(sequence));
+        }
+
+        for (var x = 0; x < data.Length; x++)
+        {
+            for (var y = 0; y < data.Length; y++)
+            {
+                yield return (data[x], data[y]);
+            }
+        }
+    }
 }
