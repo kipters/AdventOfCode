@@ -3,5 +3,6 @@
     "**/bin": true,
     "**/obj": true
   },
-  "gitmoji.outputType": "emoji"
+  "gitmoji.outputType": "emoji",
+  "github.copilot.editor.enableAutoCompletions": false
 }
