@@ -187,4 +187,22 @@ public static class EnumerableExtensions
             }
         }
     }
+
+    // public static IDictionary<T, int> ToFrequencies<T>(this IEnumerable<T> sequence) where T : notnull => sequence
+    //     .GroupBy(n => n)
+    //     .ToDictionary(n => n.Key, n => n.Count());
+
+    public static IDictionary<T, int> ToFrequencies<T>(this IEnumerable<T> sequence) where T : notnull
+    {
+        ArgumentNullException.ThrowIfNull(sequence);
+        var dict = new Dictionary<T, int>();
+
+        foreach (var item in sequence)
+        {
+            var count = dict.GetValueOrDefault(item, 0) + 1;
+            dict[item] = count;
+        }
+
+        return dict;
+    }
 }

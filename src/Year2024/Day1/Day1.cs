@@ -1,3 +1,5 @@
+using Utilities.Extensions;
+
 namespace Year2024;
 
 public class Day1
@@ -36,8 +38,7 @@ public class Day1
 
         var lut = pairs
             .Select(p => int.Parse(p[1]))
-            .GroupBy(n => n)
-            .ToDictionary(g => g.Key, g => g.Count());
+            .ToFrequencies();
 
         var score = pairs
             .Select(p => int.Parse(p[0]))

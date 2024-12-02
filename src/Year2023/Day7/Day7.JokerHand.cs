@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Utilities.Extensions;
 
 namespace Year2023;
 
@@ -14,9 +15,7 @@ public partial class Day7
             _cards = cards;
             Bid = bid;
 
-            var groups = cards
-                .GroupBy(_ => _)
-                .ToDictionary(_ => _.Key, _ => _.Count());
+            var groups = cards.ToFrequencies();
 
             if (cards == "JJJJJ")
             {
