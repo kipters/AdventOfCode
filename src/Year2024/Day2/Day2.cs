@@ -33,11 +33,11 @@ public class Day2
                 (increase: 0, decrease: 0, deltafail: 0),
                 (s, w) => (w[0] - w[1]) switch
                 {
-                    >3 => s with { deltafail = s.deltafail + 1 },
-                    >0 => s with { decrease = s.decrease + 1},
+                    > 3 => s with { deltafail = s.deltafail + 1 },
+                    > 0 => s with { decrease = s.decrease + 1 },
                     0 => s with { deltafail = s.deltafail + 1 },
-                    <-3 => s with { deltafail = s.deltafail + 1 },
-                    <0 => s with { increase = s.increase + 1 },
+                    < -3 => s with { deltafail = s.deltafail + 1 },
+                    < 0 => s with { increase = s.increase + 1 },
                 }, s => s switch
                 {
                     (_, 0, 0) => true,
@@ -75,7 +75,7 @@ public class Day2
             AreLevelsSafe(originalReport) ||
             Enumerable
                 .Range(0, originalReport.Length - 1)
-                .Select(i => originalReport[0..i].Concat(originalReport[(i+1)..]))
+                .Select(i => originalReport[0..i].Concat(originalReport[(i + 1)..]))
                 .Any(AreLevelsSafe) ||
             AreLevelsSafe(originalReport[..^1]);
     }
