@@ -188,10 +188,6 @@ public static class EnumerableExtensions
         }
     }
 
-    // public static IDictionary<T, int> ToFrequencies<T>(this IEnumerable<T> sequence) where T : notnull => sequence
-    //     .GroupBy(n => n)
-    //     .ToDictionary(n => n.Key, n => n.Count());
-
     public static IDictionary<T, int> ToFrequencies<T>(this IEnumerable<T> sequence) where T : notnull
     {
         ArgumentNullException.ThrowIfNull(sequence);
