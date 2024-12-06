@@ -201,4 +201,19 @@ public static class EnumerableExtensions
 
         return dict;
     }
+
+    public static IEnumerable<TSource> TransformWhile<TSource>(this TSource source
+        , Func<TSource, TSource> func
+        , Func<TSource, bool> shouldContinue)
+    {
+        ArgumentNullException.ThrowIfNull(func);
+        ArgumentNullException.ThrowIfNull(shouldContinue);
+
+        var result = source;
+        do
+        {
+            result = func(result);
+            yield return result;
+        } while (shouldContinue(result));
+    }
 }
