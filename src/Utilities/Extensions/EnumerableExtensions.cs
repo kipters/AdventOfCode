@@ -216,4 +216,23 @@ public static class EnumerableExtensions
             yield return result;
         } while (shouldContinue(result));
     }
+
+    public static IEnumerable<(T x, T y)> CartesianProduct<T>(this IEnumerable<T> a, IEnumerable<T> b)
+    {
+        ArgumentNullException.ThrowIfNull(a);
+        ArgumentNullException.ThrowIfNull(b);
+        using var outerEnumerator = a.GetEnumerator();
+
+        while (outerEnumerator.MoveNext())
+        {
+            var x = outerEnumerator.Current;
+            var innerEnumerator = b.GetEnumerator();
+
+            while (innerEnumerator.MoveNext())
+            {
+                var y = innerEnumerator.Current;
+                yield return (x, y);
+            }
+        }
+    }
 }
