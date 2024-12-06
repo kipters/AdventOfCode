@@ -170,24 +170,6 @@ public static class EnumerableExtensions
         }
     }
 
-    public static IEnumerable<(T a, T b)> AsPairs<T>(this IEnumerable<T> sequence)
-    {
-        var data = sequence.ToArray();
-
-        if (data.Length < 2)
-        {
-            throw new ArgumentException("Sequence must contain at least two items", nameof(sequence));
-        }
-
-        for (var x = 0; x < data.Length; x++)
-        {
-            for (var y = 0; y < data.Length; y++)
-            {
-                yield return (data[x], data[y]);
-            }
-        }
-    }
-
     public static IDictionary<T, int> ToFrequencies<T>(this IEnumerable<T> sequence) where T : notnull
     {
         ArgumentNullException.ThrowIfNull(sequence);
@@ -217,7 +199,7 @@ public static class EnumerableExtensions
         } while (shouldContinue(result));
     }
 
-    public static IEnumerable<(T x, T y)> CartesianProduct<T>(this IEnumerable<T> a, IEnumerable<T> b)
+    public static IEnumerable<(TFirst x, TSecond y)> CartesianProduct<TFirst, TSecond>(this IEnumerable<TFirst> a, IEnumerable<TSecond> b)
     {
         ArgumentNullException.ThrowIfNull(a);
         ArgumentNullException.ThrowIfNull(b);
@@ -235,4 +217,6 @@ public static class EnumerableExtensions
             }
         }
     }
+
+    public static IEnumerable<(T x, T y)> CartesianProduct<T>(this IEnumerable<T> sequence) => sequence.CartesianProduct(sequence);
 }
