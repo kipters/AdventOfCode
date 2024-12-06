@@ -73,4 +73,13 @@ public static class NumberEnumerableExtensions
 
     public static T LeastCommonMultiple<T>(this IEnumerable<T> values) where T : INumber<T>
         => values.Aggregate(LeastCommonMultiple);
+
+    public static IEnumerable<T> CountTo<T>(this T start, T end)
+        where T : IComparisonOperators<T, T, bool>, IIncrementOperators<T>
+    {
+        for (var i = start; i <= end; i++)
+        {
+            yield return i;
+        }
+    }
 }
