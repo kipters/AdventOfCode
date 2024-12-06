@@ -85,16 +85,4 @@ public class Day3
         (int one, int zero) when one == zero => '0',
         _ => throw new Exception()
     };
-
-    // private static IEnumerable<string> FindMatches(IEnumerable<string> data,
-    //     int index, Func<(int one, int zero), char> predicate)
-    // {
-    //     var needle = data
-    //         .Aggregate((one: 0, zero: 0), (acc, l) => l[index] switch
-    //         {
-    //             '0' => acc with { zero = acc.zero + 1 },
-    //             '1' => acc with { one = acc.one + 1 },
-    //             _ => throw new Exception()
-    //         }, predicate);
-    // }
 }
