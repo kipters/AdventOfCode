@@ -19,7 +19,7 @@ public class Day9
 
     private bool IsNotSum(long[] arg) => !arg[..^1]
         .CartesianProduct()
-        .Select(p => p.x + p.y)
+        .Select(p => p.a + p.b)
         .Contains(arg[^1]);
 
     [Theory]

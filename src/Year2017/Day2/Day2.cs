@@ -32,10 +32,10 @@ public class Day2
                 .Split('\t', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                 .Select(int.Parse)
                 .CartesianProduct()
-                .Where(t => t.x != t.y)
-                .Single(t => t.x % t.y == 0)
+                .Where(t => t.a != t.b)
+                .Single(t => t.a % t.b == 0)
             )
-            .Select(t => t.x / t.y)
+            .Select(t => t.a / t.b)
             .Sum();
 
         Assert.Equal(result, checksum);

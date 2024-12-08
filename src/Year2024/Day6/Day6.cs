@@ -98,7 +98,7 @@ public class Day6
 
         var validPositions = 0.CountTo(maxX)
             .CartesianProduct(0.CountTo(maxY))
-            .Where(c => map[c.y][c.x] == '.')
+            .Where(c => map[c.b][c.a] == '.')
             .Count(c => IsLoop(c, map, initialPosition));
 
         Assert.Equal(result, validPositions);
@@ -136,7 +136,7 @@ public class Day6
 
         var validPositions = 0.CountTo(maxX)
             .CartesianProduct(0.CountTo(maxY))
-            .Where(c => map[c.y][c.x] == '.');
+            .Where(c => map[c.b][c.a] == '.');
 
         foreach (var p in validPositions)
         {
