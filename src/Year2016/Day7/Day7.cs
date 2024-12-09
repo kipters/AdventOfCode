@@ -40,11 +40,11 @@ public partial class Day7
         .Where(w => w[0] == w[3] && w[1] == w[2] && w[0] != w[1]);
 
     [Theory]
-    [InlineData(new[] { "aba[bab]xyz" }, 1)]
-    [InlineData(new[] { "xyx[xyx]xyx" }, 0)]
-    [InlineData(new[] { "aaa[kek]eke" }, 1)]
-    [InlineData(new[] { "zazbz[bzb]cdb" }, 1)]
-    //[FileLines("data.txt", 260)]
+    // [InlineData(new[] { "aba[bab]xyz" }, 1)]
+    // [InlineData(new[] { "xyx[xyx]xyx" }, 0)]
+    // [InlineData(new[] { "aaa[kek]eke" }, 1)]
+    // [InlineData(new[] { "zazbz[bzb]cdb" }, 1)]
+    [FileLines("data.txt", 260)]
     public void Part2(IEnumerable<string> data, int result)
     {
         var regex = SplitRegex();
@@ -67,7 +67,7 @@ public partial class Day7
                 .Where(w => w.Length == 3)
                 .Where(w => w[0] == w[2] && w[0] != w[1])
             )
-            .Select(g => g[1] << 16 + g[0]);
+            .Select(g => (g[0], g[1]));
 
         var babs = arg
             .Where(p => p is [ '[', .., ']' ])
@@ -76,7 +76,7 @@ public partial class Day7
                 .Where(w => w.Length == 3)
                 .Where(w => w[0] == w[2] && w[0] != w[1])
             )
-            .Select(g => g[0] << 16 + g[1]);
+            .Select(g => (g[1], g[0]));
 
         return abas.Intersect(babs).Any();
     }
