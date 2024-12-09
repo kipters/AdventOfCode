@@ -31,11 +31,11 @@ public class Day2
             .Select(l => l
                 .Split('\t', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                 .Select(int.Parse)
-                .AsPairs()
-                .Where(t => t.a != t.b)
-                .Single(t => t.a % t.b == 0)
+                .CartesianProduct()
+                .Where(t => t.x != t.y)
+                .Single(t => t.x % t.y == 0)
             )
-            .Select(t => t.a / t.b)
+            .Select(t => t.x / t.y)
             .Sum();
 
         Assert.Equal(result, checksum);
