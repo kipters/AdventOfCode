@@ -199,7 +199,7 @@ public static class EnumerableExtensions
         } while (shouldContinue(result));
     }
 
-    public static IEnumerable<(TFirst x, TSecond y)> CartesianProduct<TFirst, TSecond>(this IEnumerable<TFirst> a, IEnumerable<TSecond> b)
+    public static IEnumerable<(TFirst a, TSecond b)> CartesianProduct<TFirst, TSecond>(this IEnumerable<TFirst> a, IEnumerable<TSecond> b)
     {
         ArgumentNullException.ThrowIfNull(a);
         ArgumentNullException.ThrowIfNull(b);
@@ -218,5 +218,5 @@ public static class EnumerableExtensions
         }
     }
 
-    public static IEnumerable<(T x, T y)> CartesianProduct<T>(this IEnumerable<T> sequence) => sequence.CartesianProduct(sequence);
+    public static IEnumerable<(T a, T b)> CartesianProduct<T>(this IEnumerable<T> sequence) => sequence.CartesianProduct(sequence);
 }
