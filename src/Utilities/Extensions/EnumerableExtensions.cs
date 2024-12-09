@@ -219,4 +219,12 @@ public static class EnumerableExtensions
     }
 
     public static IEnumerable<(T a, T b)> CartesianProduct<T>(this IEnumerable<T> sequence) => sequence.CartesianProduct(sequence);
+
+    public static IEnumerable<T> Repeat<T>(this T item, int count)
+    {
+        for (var i = 0; i < count; i++)
+        {
+            yield return item;
+        }
+    }
 }
