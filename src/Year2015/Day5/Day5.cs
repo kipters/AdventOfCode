@@ -1,10 +1,9 @@
 using System.Buffers;
 using Utilities.Extensions;
-using Xunit.Abstractions;
 
 namespace Year2015;
 
-public class Day5(ITestOutputHelper helper)
+public class Day5
 {
     [Theory]
     [InlineData(new[] { "ugknbfddgicrmopn" }, 1)]
@@ -66,7 +65,7 @@ public class Day5(ITestOutputHelper helper)
         var nice = data.Count(IsNice);
         Assert.Equal(result, nice);
 
-        bool IsNice(string line)
+        static bool IsNice(string line)
         {
             var triplet = line
                 .SlidingWindow(3)
@@ -78,9 +77,7 @@ public class Day5(ITestOutputHelper helper)
                 .SkipBy((a, b) => a == b)
                 .GroupBy(_ => _)
                 .Any(g => g.Count() >= 2)
-                // .ToArray()
                 ;
-            helper.WriteLine($"{triplet} {digram} {triplet && digram}");
             return triplet && digram;
         }
     }

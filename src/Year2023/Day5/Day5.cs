@@ -32,7 +32,6 @@ public class Day5
             .Select(x => EnumerableExtensions.Range(x[0], x[1]))
             ;
 
-        // var min = FindLowestLocation(data, seedsRanges);
         var min = seedsRanges
             .AsParallel()
             .Select(r => FindLowestLocation(data, r))
