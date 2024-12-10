@@ -42,7 +42,7 @@ public static class EnumerableExtensions
     public static string Stringify<T>(this IEnumerable<T> sequence) => string.Join(' ', sequence);
     public static string AsString(this Span<char> sequence) => new(sequence);
 
-    public static IEnumerable<T> Inspect<T>(this IEnumerable<T> sequence, Action<T> predicate)
+    public static IEnumerable<T> Tap<T>(this IEnumerable<T> sequence, Action<T> predicate)
     {
         ArgumentNullException.ThrowIfNull(sequence);
         ArgumentNullException.ThrowIfNull(predicate);

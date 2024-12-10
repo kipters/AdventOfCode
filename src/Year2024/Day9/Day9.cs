@@ -37,7 +37,7 @@ public class Day9
         .Reverse()
         .Where(n => n is File f && !f.Consumed)
         .Cast<File>()
-        .Inspect(f => f.Consumed = true)
+        .Tap(f => f.Consumed = true)
         .SelectMany(f => f.Id.Repeat(f.Length));
 
     private static IEnumerable<long> ReadDefragmented(INode[] nodes)
