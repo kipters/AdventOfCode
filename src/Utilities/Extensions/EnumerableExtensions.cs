@@ -227,4 +227,20 @@ public static class EnumerableExtensions
             yield return item;
         }
     }
+
+    public static IEnumerable<T> Assert<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
+    {
+        ArgumentNullException.ThrowIfNull(sequence);
+        ArgumentNullException.ThrowIfNull(predicate);
+
+        using var enumerator = sequence.GetEnumerator();
+
+        while (enumerator.MoveNext())
+        {
+            var current = enumerator.Current;
+            yield return predicate(current)
+                ? current
+                : throw new AssertionException($"Assertion failed at item {current}");
+        }
+    }
 }
