@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0-bookworm-slim
+FROM mcr.microsoft.com/dotnet/sdk:10.0-preview
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=${USER_UID}
@@ -7,6 +7,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends apt-utils dialo
     && apt-get -y install openssh-client less iproute2 apt-transport-https gnupg2 curl lsb-release \
     git procps ca-certificates python3-pip vim nano groff zip file jq wget \
     # Create a non-root user
+    && deluser ubuntu \
     && groupadd --gid ${USER_GID} ${USERNAME} \
     && useradd -s /bin/bash --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} \
     # add sudo
