@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Utilities.Tests/Utilities.Tests.csproj" />
+    <Project Path="src/Utilities/Utilities.csproj" />
+    <Project Path="src/Year2015/Year2015.csproj" />
+    <Project Path="src/Year2016/Year2016.csproj" />
+    <Project Path="src/Year2017/Year2017.csproj" />
+    <Project Path="src/Year2018/Year2018.csproj" />
+    <Project Path="src/Year2019/Year2019.csproj" />
+    <Project Path="src/Year2020/Year2020.csproj" />
+    <Project Path="src/Year2021/Year2021.csproj" />
+    <Project Path="src/Year2022/Year2022.csproj" />
+    <Project Path="src/Year2023/Year2023.csproj" />
+    <Project Path="src/Year2024/Year2024.csproj" />
+    <Project Path="src/Year2025/Year2025.csproj" />
+  </Folder>
+</Solution>
