@@ -1,5 +1,8 @@
-param (
-  [Parameter(Mandatory = $true)][int]$year
+#!/usr/bin/env pwsh
+
+param(
+  [Parameter(Mandatory = $true)][int] $year,
+  [int] $days = 12
 )
 
 $folder = "Year$year"
@@ -52,7 +55,7 @@ New-Item -ItemType Directory -Path $path
 New-Item -ItemType File -Path $csprojPath -Value $csproj
 New-Item -ItemType File -Path ([System.IO.Path]::Combine($path, "GlobalUsings.cs")) -Value "global using Xunit;`n"
 
-for ($i = 1; $i -lt 26; $i++) {
+for ($i = 1; $i -le $days; $i++) {
   $dayPath = [System.IO.Path]::Combine($path, "Day$i")
   New-Item -ItemType Directory -Path $dayPath
 
