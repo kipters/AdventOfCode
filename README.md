@@ -1,6 +1,6 @@
 # My solutions for every Advent of Code
 
-They're all implemented as xUnit tests in C# 13 on .NET 9.
+They're all implemented as xUnit tests in C# 14 on .NET 10.
 
 2015: ⭐⭐⭐⭐⭐⭐⭐⭐🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜
 
