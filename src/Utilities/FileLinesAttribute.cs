@@ -6,13 +6,12 @@ namespace Xunit;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 public sealed class FileLinesAttribute(string filename, params object[] passthrough) : DataAttribute
 {
-    private bool _isSlow;
     public bool IsSlow
     {
-        get => _isSlow;
+        get;
         init
         {
-            _isSlow = value;
+            field = value;
             Skip = value && Environment.GetEnvironmentVariable("RUN_SLOW_TESTS") is null ? "Slow test" : Skip;
         }
     }
