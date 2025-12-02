@@ -243,4 +243,50 @@ public static class EnumerableExtensions
                 : throw new AssertionException($"Assertion failed at item {current}");
         }
     }
+
+    public static bool AllEqual<T>(this IEnumerable<T> sequence) where T : IEquatable<T>
+    {
+        ArgumentNullException.ThrowIfNull(sequence);
+        using var enumerator = sequence.GetEnumerator();
+        if (!enumerator.MoveNext())
+        {
+            throw new ArgumentException("Sequence is empty", nameof(sequence));
+        }
+
+        var sample = enumerator.Current;
+
+        while (enumerator.MoveNext())
+        {
+            if (!enumerator.Current.Equals(sample))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static bool AllEqual<T>(this IEnumerable<T> sequence, IEqualityComparer<T> equalityComparer)
+    {
+        ArgumentNullException.ThrowIfNull(sequence);
+        ArgumentNullException.ThrowIfNull(equalityComparer);
+
+        using var enumerator = sequence.GetEnumerator();
+        if (!enumerator.MoveNext())
+        {
+            throw new ArgumentException("Sequence is empty", nameof(sequence));
+        }
+
+        var sample = enumerator.Current;
+
+        while (enumerator.MoveNext())
+        {
+            if (!equalityComparer.Equals(sample, enumerator.Current))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
